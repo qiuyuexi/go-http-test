@@ -1,6 +1,6 @@
 package main
 
-import "mydata/pkg/server"
+import "go-test/pkg/server"
 
 func main() {
 	server.RegisterSignal()

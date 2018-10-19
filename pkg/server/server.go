@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
-	"mydata/internal/model"
+	"go-test/internal/model"
 	"net/http"
 	"os"
 	"os/signal"

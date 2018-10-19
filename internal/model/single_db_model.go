@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/go-sql-driver/mysql"
 	db "gitlab.meitu.com/gocommons/database/mysql"
-	"mydata/env"
+	"go-test/env"
 	"reflect"
 	"encoding/json"
 )
