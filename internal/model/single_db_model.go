@@ -6,7 +6,6 @@ import (
 	db "gitlab.meitu.com/gocommons/database/mysql"
 	"go-test/env"
 	"reflect"
-	"encoding/json"
 )
 
 type SingleDb struct {
@@ -70,12 +69,11 @@ func (singleDb *SingleDb) Select() []interface{} {
 		}
 		query.Scan(scans...) //返回的是[]uint8,[]uint8,[]uint8
 		values = append(values, ttt)
-		fmt.Println(ttt)
 	}
 
 	for _, v := range values {
-		jsonByte, _ := json.Marshal(v)
-		fmt.Println(string(jsonByte))
+		t := v.(*TestTemplate)
+		fmt.Println(t)
 	}
 	return values
 }

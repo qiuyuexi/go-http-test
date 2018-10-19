@@ -14,14 +14,15 @@ type T struct {
 }
 
 type TTT struct {
-	Id int `json:"id"`
-	T int	`json:"t"`
+	Id   int    `json:"id"`
+	T    int    `json:"t"`
 	Test string `json:"test"`
 }
 
 var Db sql.DB
-func init()  {
-	
+
+func init() {
+
 }
 
 func GetConn() {
@@ -61,7 +62,6 @@ func GetConn() {
 			fmt.Println(cols[k], *t)
 		}
 
-
 	}
 
 }
@@ -85,14 +85,13 @@ func Query() {
 
 	cols, err := query.Columns()
 	fmt.Println(cols)
-	var values  []map[interface{}]interface{}
-
+	var values []map[interface{}]interface{}
 
 	vals := make([]byte, len(cols)) //存在字符串，需要二维数组
 	scans := make([]interface{}, len(cols))
 	//fmt.Println(vals)
 
-	for i := range vals{
+	for i := range vals {
 		//fmt.Println(i)
 		scans[i] = &vals[i]
 		fmt.Println(scans[i])
@@ -100,24 +99,23 @@ func Query() {
 
 	for query.Next() {
 
-		query.Scan(scans...)//返回的是[]uint8,[]uint8,[]uint8
+		query.Scan(scans...) //返回的是[]uint8,[]uint8,[]uint8
 		fmt.Println(scans)
-
 
 		row := make(map[interface{}]interface{})
 		for k, v := range vals {
-			fmt.Println(reflect.TypeOf(v).String(),v)
-			row[cols[k]] =v
+			fmt.Println(reflect.TypeOf(v).String(), v)
+			row[cols[k]] = v
 		}
-		values = append(values,row)
+		values = append(values, row)
 	}
 	fmt.Println(values)
-	for kk,vv := range values{
-		fmt.Println(kk,vv)
+	for kk, vv := range values {
+		fmt.Println(kk, vv)
 	}
 }
 
-func QueryReturnStruct()  {
+func QueryReturnStruct() {
 	dsn := "root:@/test?charset=utf8"
 	conn, err := sql.Open("mysql", dsn)
 	if err != nil {
@@ -132,22 +130,20 @@ func QueryReturnStruct()  {
 		fmt.Println("db select error")
 		panic(queryErr)
 	}
-	var values  []interface{}
+	var values []interface{}
 
 	for query.Next() {
 		ttt := reflect.New(reflect.TypeOf(*new(TTT))).Interface()
 		v := reflect.ValueOf(ttt).Elem()
 		var scans []interface{}
 
-		for i :=0; i < v.NumField() ;i++  {
+		for i := 0; i < v.NumField(); i++ {
 			addr := v.Field(i).Addr().Interface()
-			scans = append(scans,addr)
+			scans = append(scans, addr)
 		}
-		query.Scan(scans...)//返回的是[]uint8,[]uint8,[]uint8
-		values = append(values,ttt)
+		query.Scan(scans...) //返回的是[]uint8,[]uint8,[]uint8
+		values = append(values, ttt)
 	}
-	jsonByte ,err := json.Marshal(values[0])
+	jsonByte, err := json.Marshal(values[0])
 	fmt.Println(string(jsonByte))
-
-
 }

@@ -1,6 +1,9 @@
 package model
 
-import "sync"
+import (
+	"fmt"
+	"sync"
+)
 
 var instance *TestModel
 
@@ -31,5 +34,6 @@ func GetTestModelInstance() *TestModel {
 	once.Do(func() {
 		instance = newModel()
 	})
+	fmt.Println(&instance)
 	return instance
 }
