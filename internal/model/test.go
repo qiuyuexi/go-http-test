@@ -1,7 +1,6 @@
 package model
 
 import (
-	"fmt"
 	"sync"
 )
 
@@ -34,6 +33,5 @@ func GetTestModelInstance() *TestModel {
 	once.Do(func() {
 		instance = newModel()
 	})
-	fmt.Println(&instance)
 	return instance
 }

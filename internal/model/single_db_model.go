@@ -15,8 +15,9 @@ type SingleDb struct {
 }
 
 /**
-*warn:密码为空，会报未选择数据库
+*warn:密码为空，会报未选择数据库。
 *待优化
+*todo : 使用链表来保存从库链接
 */
 func (singleDb *SingleDb) getConn(isMaster int) db.DB {
 	config := env.GetMysqlConfig((*singleDb).configFileName)
