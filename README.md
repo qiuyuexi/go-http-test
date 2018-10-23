@@ -1,9 +1,9 @@
 # go-test
 
-##golang  学习瞎写。 所以移除了 gin等扩展的使用。
+##golang  学习瞎写
 
 ##测试table
-```json
+```sql
     CREATE TABLE `t` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
       `t` tinyint(4) NOT NULL,
@@ -12,3 +12,8 @@
     ) ENGINE=InnoDB AUTO_INCREMENT=223 DEFAULT CHARSET=utf8
 
 ```
+
+##todo
+
+log: https://github.com/Sirupsen/logrus
+http: gin
